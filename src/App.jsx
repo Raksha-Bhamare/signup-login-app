@@ -24,7 +24,7 @@ function SignupPage() {
     }
 
     try {
-      const response = await axios.post("http://localhost:5000/signup", {
+      const response = await axios.post("/api/signup", {
         name,
         email,
         password,
@@ -34,15 +34,13 @@ function SignupPage() {
       navigate("/home");
     } catch (error) {
       console.log(error);
-      console.log(error.response);
-      console.log(error.message);
       alert(error.response?.data?.message || error.message);
     }
   };
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post("http://localhost:5000/login", {
+      const response = await axios.post("/api/login", {
         email,
         password,
       });
@@ -135,4 +133,4 @@ function App() {
   );
 }
 
-export default App; 
+export default App;
