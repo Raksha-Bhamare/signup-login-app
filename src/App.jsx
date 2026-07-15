@@ -24,7 +24,7 @@ function SignupPage() {
     }
 
     try {
-      const response = await axios.post("/api/signup/", {
+      const response = await axios.post("/api/signup", {
         name,
         email,
         password,
