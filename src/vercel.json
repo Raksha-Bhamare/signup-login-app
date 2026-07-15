@@ -1,13 +1,33 @@
 {
-  "services": [
-    {
-      "src": "backend",
-      "name": "backend",
+  "services": {
+    "frontend": {
+      "root": ".",
+      "framework": "vite"
+    },
+    "backend": {
+      "root": "backend/",
+      "framework": "express",
       "entrypoint": "server.js"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/signup",
+      "destination": {
+        "service": "backend"
+      }
     },
     {
-      "src": ".",
-      "name": "frontend"
+      "source": "/login",
+      "destination": {
+        "service": "backend"
+      }
+    },
+    {
+      "source": "/(.*)",
+      "destination": {
+        "service": "frontend"
+      }
     }
   ]
 }
