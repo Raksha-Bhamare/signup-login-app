@@ -1,0 +1,13 @@
+{
+  "services": [
+    {
+      "src": "backend",
+      "name": "backend",
+      "entrypoint": "server.js"
+    },
+    {
+      "src": ".",
+      "name": "frontend"
+    }
+  ]
+}
