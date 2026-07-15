@@ -8,7 +8,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.post("/api/signup", async (req, res) => {
+app.post("/signup", async (req, res) => {
   try {
     await connectDB();
 
@@ -29,7 +29,7 @@ app.post("/api/signup", async (req, res) => {
   }
 });
 
-app.post("/api/login", async (req, res) => {
+app.post("/login", async (req, res) => {
   try {
     await connectDB();
 
