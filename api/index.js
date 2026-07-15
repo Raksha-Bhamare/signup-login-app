@@ -1,56 +1,56 @@
-const express = require("express");
-const cors = require("cors");
 const connectDB = require("../backend/db");
 const User = require("../backend/User");
 
-const app = express();
-
-app.use(cors());
-app.use(express.json());
-
-app.post("/signup", async (req, res) => {
+module.exports = async (req, res) => {
   try {
     await connectDB();
 
-    const { name, email, password } = req.body;
+    if (req.method === "POST" && req.url.includes("/signup")) {
+      const { name, email, password } = req.body;
 
-    const existingUser = await User.findOne({ email });
+      const existingUser = await User.findOne({ email });
 
-    if (existingUser) {
-      return res.status(400).json({ message: "User already exists" });
-    }
+      if (existingUser) {
+        return res.status(400).json({
+          message: "User already exists",
+        });
+      }
 
-    await new User({ name, email, password }).save();
+      await new User({
+        name,
+        email,
+        password,
+      }).save();
 
-    res.status(201).json({ message: "Registration successful" });
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ message: "Server error" });
-  }
-});
-
-app.post("/login", async (req, res) => {
-  try {
-    await connectDB();
-
-    const { email, password } = req.body;
-
-    const user = await User.findOne({ email, password });
-
-    if (!user) {
-      return res.status(400).json({
-        message: "Invalid Email or Password",
+      return res.status(201).json({
+        message: "Registration successful",
       });
     }
 
-    res.status(200).json({
-      message: "Login Successful",
+    if (req.method === "POST" && req.url.includes("/login")) {
+      const { email, password } = req.body;
+
+      const user = await User.findOne({ email, password });
+
+      if (!user) {
+        return res.status(400).json({
+          message: "Invalid Email or Password",
+        });
+      }
+
+      return res.status(200).json({
+        message: "Login Successful",
+      });
+    }
+
+    return res.status(404).json({
+      message: "Route not found",
     });
   } catch (error) {
-    res.status(500).json({
-      message: error.message,
+    console.log(error);
+
+    return res.status(500).json({
+      message: "Server error",
     });
   }
-});
-
-module.exports = app;
+};
