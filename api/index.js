@@ -1,7 +1,7 @@
-const connectDB = require("../backend/db");
-const User = require("../backend/user");
+import connectDB from "../backend/db.js";
+import User from "../backend/user.js";
 
-module.exports = async (req, res) => {
+export default async function handler(req, res) {
   try {
     await connectDB();
 
@@ -53,4 +53,4 @@ module.exports = async (req, res) => {
       message: "Server error",
     });
   }
-};
+}
