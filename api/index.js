@@ -1,5 +1,5 @@
 const connectDB = require("../backend/db");
-const User = require("../backend/User");
+const User = require("../backend/user");
 
 module.exports = async (req, res) => {
   try {
