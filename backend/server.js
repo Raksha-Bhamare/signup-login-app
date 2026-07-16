@@ -12,7 +12,7 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.send("Backend is running!");
 });
-app.post("/signup", async (req, res) => {
+app.post("/api/signup", async (req, res) => {
   try {
     const { name, email, password } = req.body;
 
@@ -37,7 +37,7 @@ app.post("/signup", async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 });
-app.post("/login", async (req, res) => {
+app.post("/api/login", async (req, res) => {
   try {
     const { email, password } = req.body;
 
